@@ -63,7 +63,13 @@ public class MemberUpdateForm extends HttpServlet {
 	//수정페이지로 이동
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//파라미터 받기, 수정할 회원아이디 받기
-		String id = request.getParameter("id");
+//		String id = request.getParameter("id");
+		//로그인 된걸 받아옴, session에서 id 가져오기
+		String id = (String) request.getSession().getAttribute("loginId"); //이름 같아야한다.
+		if(id == null) {
+			response.sendRedirect("/edu/member/login.jsp");
+			return;
+		} 
 		
 		//서비스 로직 처리(회원정보 1건 조회)
 		MemberDAO dao = new MemberDAO();
@@ -72,7 +78,7 @@ public class MemberUpdateForm extends HttpServlet {
 		//결과 저장
 		request.setAttribute("member", vo);
 		
-		//뷰페이지로 이동
+		//뷰페이지로 이동, request객체를 넘겨줘야하기 때문에 forward
 		request.getRequestDispatcher("/member/memberUpdate.jsp")
 				.forward(request, response);
 	}

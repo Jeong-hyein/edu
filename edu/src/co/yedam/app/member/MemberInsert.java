@@ -15,6 +15,7 @@ public class MemberInsert extends HttpServlet {
        
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//무조건 하고 시작. 아니면 한글 다 깨진다.
 		//응답결과 인코딩
 		//application/octet-stream 파일 다운받아짐, 타입을 잘 지정해야함
@@ -37,6 +38,7 @@ public class MemberInsert extends HttpServlet {
 			
 			
 		}
+		String gender = request.getParameter("gender");
 		String religion = request.getParameter("religion");
 		String introduction = request.getParameter("introduction");
 		
@@ -60,19 +62,26 @@ public class MemberInsert extends HttpServlet {
 		member.setPwd(pwd);
 		member.setName(name);
 		member.setHobby(hobbys);
+		member.setGender(gender);
 		member.setReligion(religion);
 		member.setIntroduction(introduction);
 		int r = memberDAO.memberInsert(member);
 		
 		//3. 결과 출력
-		PrintWriter out = response.getWriter();
-		out.print("<br>id = " + id);
-		out.append("<br>pwd = " + pwd);
-		out.append("<br>name = " + name);
-		out.append("<br>hobbys = " + hobbys);
-		out.append("<br>religion = " + religion);
-		out.append("<br>introduction = " + introduction);
-		out.print("<br> 처리된 건수= " + r);
+//		PrintWriter out = response.getWriter();
+//		out.print("<br>id = " + id);
+//		out.append("<br>pwd = " + pwd);
+//		out.append("<br>name = " + name);
+//		out.append("<br>hobbys = " + hobbys);
+//		out.append("<br>gender = " + gender);
+//		out.append("<br>religion = " + religion);
+//		out.append("<br>introduction = " + introduction);
+//		out.print("<br> 처리된 건수= " + r);
+		
+		//3. 회원목록으로 이동 //include, forwaed, sendRedirect
+		//경로 다름 주의!, 페이지만 바뀌면 된다, request객체 필요없음.: send
+		response.sendRedirect("/edu/MemberList.do");
+//		request.getRequestDispatcher("/MemberList.do").forward(request, response);
 		
 	}
 	

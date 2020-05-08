@@ -3,6 +3,7 @@ package co.yedam.app.member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import co.yedam.app.common.ConnectionManager;
 
@@ -47,6 +48,7 @@ public class MemberDAO {
 		return r;
 	}
 
+	//단건조회
 	public MemberVO getMember(String id) {
 		MemberVO vo = new MemberVO();
 		Connection conn = null;
@@ -76,11 +78,46 @@ public class MemberDAO {
 		} finally {
 			//5.연결 해제
 			ConnectionManager.close(conn);
-		}
-		
+		}	
 		return vo;
 	}
+	
+	//전체조회
+	public ArrayList<MemberVO> getMemberList() {
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		try {
+			//1. DB 연결
+			conn = ConnectionManager.getConnnect();
+			//2. 쿼리 준비
+			String sql = "select * from member order by id";
+			psmt = conn.prepareStatement(sql);
+			//3. statment 실행
+			ResultSet rs = psmt.executeQuery(); //rs: 결과 집합.
+			while(rs.next()) { //조회된 건수만큼 while 돈다.
+				MemberVO vo = new MemberVO();
+				vo.setId(rs.getString("id"));
+				vo.setPwd(rs.getString("pwd"));
+				vo.setName(rs.getString("name"));
+				vo.setHobby(rs.getString("hobby"));
+				vo.setGender(rs.getString("gender"));
+				vo.setReligion(rs.getString("religion"));
+				vo.setIntroduction(rs.getString("introduction"));
+				vo.setRegdt(rs.getString("regdt"));
+				list.add(vo);
+			}
+			//4. 결과 저정
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			//5.연결 해제
+			ConnectionManager.close(conn);
+		}		
+		return list;
+	}
 
+	//수정
 	public int memberUpdate(MemberVO member) {
 
 		try {
@@ -115,7 +152,30 @@ public class MemberDAO {
 			// 5. 연결해제
 			ConnectionManager.close(conn);
 		}
-
 		return r;
 	}
+	
+	// 삭제
+		public int memberDelete(MemberVO member) {
+			int r = 0;
+			try {
+				// 1. DB 연결
+				conn = ConnectionManager.getConnnect();
+				// 2. sql구문 준비
+				String sql = "delete member where id = ?";
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, member.getId());
+				// 3. 실행
+				r = psmt.executeUpdate();
+				// 4. 결과처리
+				System.out.println(r + " 건이 삭제됨.");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				// 5. 연결해제
+				ConnectionManager.close(conn);
+			}
+			return r;
+		}
 }

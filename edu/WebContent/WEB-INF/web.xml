@@ -9,4 +9,21 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>TestServ</servlet-name> <!-- 별칭을 붙인거임 -->
+  	<servlet-class>co.yedam.app.test.TestServ</servlet-class> <!-- 경로랑 클래스명 정확히 적어줘야함 -->
+  	<init-param>
+  		<param-name>pName</param-name> <!-- 파라미터 name -->
+  		<param-value>utf-8</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>TestServ</servlet-name> <!-- servlet이름이랑 같은거 적어야함 -->
+  	<url-pattern>/test3.do</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+  	<servlet-name>TestServ</servlet-name> <!-- servlet이름이랑 같은거 적어야함 -->
+  	<url-pattern>/test4.do</url-pattern>
+  </servlet-mapping>
 </web-app>

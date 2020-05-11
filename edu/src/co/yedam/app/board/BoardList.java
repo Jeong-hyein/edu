@@ -33,32 +33,36 @@ public class BoardList extends HttpServlet {
 		ArrayList<BoardVO> list = dao.getBoardList();
 		
 		//3. 결과 출력(out.print) or 결과저장해서 view forward
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
+//		response.setContentType("text/html; charset=UTF-8");
+//		PrintWriter out = response.getWriter();
 		
-		request.getRequestDispatcher("/common/menu.jsp").include(request, response);
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("/board/boardList.jsp")
+		.forward(request, response);
 		
-		out.print("<h3>게시판목록</h3>");
-		out.print("<table border>");
-		out.print("<tr>");
-		out.print("<td>" + "게시물 번호" + "</td>");
-		out.print("<td>" + "아이디" + "</td>");
-		out.print("<td>" + "이름" + "</td>");
-		out.print("<td>" + "제목" + "</td>");
-		out.print("<td>" + "내용" + "</td>");
-		out.print("<td>" + "작성일자" + "</td>");
-		out.print("</tr>");
-		for(BoardVO vo : list) {
-			out.print("<tr>");
-			out.print("<td>" + vo.getSeq() + "</td>");
-			out.print("<td>" + vo.getId() + "</td>");
-			out.print("<td>" + vo.getName() + "</td>");
-			out.print("<td>" + vo.getTitle() + "</td>");
-			out.print("<td>" + vo.getContents() + "</td>");
-			out.print("<td>" + vo.getRegdt() + "</td>");
-			out.print("</tr>");
-		}
-		out.print("</table>");
+//		request.getRequestDispatcher("/common/menu.jsp").include(request, response);
+		
+//		out.print("<h3>게시판목록</h3>");
+//		out.print("<table border>");
+//		out.print("<tr>");
+//		out.print("<td>" + "게시물 번호" + "</td>");
+//		out.print("<td>" + "아이디" + "</td>");
+//		out.print("<td>" + "이름" + "</td>");
+//		out.print("<td>" + "제목" + "</td>");
+//		out.print("<td>" + "내용" + "</td>");
+//		out.print("<td>" + "작성일자" + "</td>");
+//		out.print("</tr>");
+//		for(BoardVO vo : list) {
+//			out.print("<tr>");
+//			out.print("<td>" + vo.getSeq() + "</td>");
+//			out.print("<td>" + vo.getId() + "</td>");
+//			out.print("<td>" + vo.getName() + "</td>");
+//			out.print("<td>" + vo.getTitle() + "</td>");
+//			out.print("<td>" + vo.getContents() + "</td>");
+//			out.print("<td>" + vo.getRegdt() + "</td>");
+//			out.print("</tr>");
+//		}
+//		out.print("</table>");
 	}
 	
 

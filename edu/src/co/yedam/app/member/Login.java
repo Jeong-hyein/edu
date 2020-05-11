@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		//forward는 전달, include는 불러오는거
-		request.getRequestDispatcher("/common/menu.jsp").include(request, response); 
+//		request.getRequestDispatcher("/common/menu.jsp").include(request, response); 
 		
 		//id 조회결과 없으면 id 없다.
 		if(vo.getId() == null) { //id 오류, isEmpty(): 없다는 뜻
@@ -45,11 +45,14 @@ public class Login extends HttpServlet {
 		}else if(! vo.getPwd().equals(pwd)) { //조회되면 pwd 검사해서 틀리면 pwd 오류, equals가 아니라면
 			out.print("pwd 오류");
 		} else { //login ok, 다 맞으면 로그인
-			out.print("로그인 성공");
+//			out.print("로그인 성공");
 			//세션에 로그인 여부를 저장
 			HttpSession session = request.getSession();
 			session.setAttribute("loginId", id); //"loginId"는 내가 지정
 			session.setAttribute("loginMember", vo); //object 타입이라서 전체 저장가능
+			request.getRequestDispatcher("/common/menu.jsp")
+					.include(request, response);
+			out.print("로그인 성공");
 		}
 		//3. 결과 저장
 		

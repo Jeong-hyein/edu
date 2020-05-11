@@ -26,14 +26,22 @@ li a:hover {
   background-color: #111;
 }
 </style>
-
+<% String contextPath = getServletContext().getContextPath(); %>
 <ul>
-  <li><a class="active" href="/edu/index.jsp">Home</a></li>
-  <li><a href="/edu/member/login.jsp">로그인</a></li>
-  <li><a href="/edu/Logout.do">로그아웃</a></li>
-  <li><a href="/edu/member/memberInsert.jsp">회원가입</a></li>
-  <li><a href="/edu/MemberUpdate.do">정보수정</a></li>
-  <li><a href="/edu/MemberList.do">회원목록</a></li>
-  <li><a href="/edu/board/boardInsert.jsp">게시판 등록</a></li>
-  <li><a href="/edu/BoardList.do">게시판 목록</a></li>
+  <li><a class="active" href="<%= contextPath %>/index.jsp">Home</a></li>
+  
+  <%
+  String loginId = (String) session.getAttribute("loginId");
+  if(loginId == null) { %>
+  <li><a href="<%=contextPath%>/member/login.jsp">로그인</a></li>
+  <li><a href="<%=contextPath%>/member/memberInsert.jsp">회원가입</a></li>
+  <%} else { %>
+  <li><a href="<%=contextPath%>/Logout.do">로그아웃</a></li>
+    <li><a href="<%=contextPath%>/MemberUpdate.do">정보수정</a></li>
+  <% } %>
+  
+
+  <li><a href="<%=contextPath%>/MemberList.do">회원목록</a></li>
+  <li><a href="<%=contextPath%>/BoardList.do">게시판 목록</a></li>
+  <li><a href="<%=contextPath%>/EmpList.do">사원 목록</a></li>
 </ul>

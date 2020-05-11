@@ -26,27 +26,35 @@ public class MemberList extends HttpServlet {
 		MemberDAO dao = new MemberDAO();
 		ArrayList<MemberVO> list = dao.getMemberList();
 		
-		//3. 결과 출력(out.print) or 결과저장해서 view forward
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		//3. 결과 출력(out.print)
+//		response.setContentType("text/html; charset=UTF-8");
+//		PrintWriter out = response.getWriter();
+//		
+//		request.getRequestDispatcher("/common/menu.jsp").include(request, response);
+//		
+//		out.print("<h3>회원목록</h3>");
+//		out.print("<table border>");
+//		out.print("<tr>");
+//		out.print("<td>" + "아이디" + "</td>");
+//		out.print("<td>" + "이름" + "</td>");
+//		out.print("<td>" + "성별" + "</td>");
+//		out.print("</tr>");
+//		for(MemberVO vo : list) {
+//			out.print("<tr>");
+//			out.print("<td>" + vo.getId() + "</td>");
+//			out.print("<td>" + vo.getName() + "</td>");
+//			out.print("<td>" + vo.getGender() + "</td>");
+//			out.print("</tr>");
+//		}
+//		out.print("</table>");
 		
-		request.getRequestDispatcher("/common/menu.jsp").include(request, response);
+		//3.  or 결과저장해서 view forward
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("member/memberList.jsp")
+				.forward(request, response);
 		
-		out.print("<h3>회원목록</h3>");
-		out.print("<table border>");
-		out.print("<tr>");
-		out.print("<td>" + "아이디" + "</td>");
-		out.print("<td>" + "이름" + "</td>");
-		out.print("<td>" + "성별" + "</td>");
-		out.print("</tr>");
-		for(MemberVO vo : list) {
-			out.print("<tr>");
-			out.print("<td>" + vo.getId() + "</td>");
-			out.print("<td>" + vo.getName() + "</td>");
-			out.print("<td>" + vo.getGender() + "</td>");
-			out.print("</tr>");
-		}
-		out.print("</table>");
+//		request.getRequestDispatcher("/test/gallery.jsp")
+//		.forward(request, response);
 	}
 
 }

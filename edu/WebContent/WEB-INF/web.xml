@@ -26,4 +26,7 @@
   	<servlet-name>TestServ</servlet-name> <!-- servlet이름이랑 같은거 적어야함 -->
   	<url-pattern>/test4.do</url-pattern>
   </servlet-mapping>
+  <session-config>
+  	<session-timeout>30</session-timeout>
+  </session-config>
 </web-app>

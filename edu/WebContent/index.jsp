@@ -10,10 +10,16 @@
 <%@include file="/common/menu.jsp" %>
 <%-- <% Date date = new Date(); %> --%>
 <h1>정혜인 홈페이지</h1>
-방문을 환영합니다
+방문을 환영합니다<br>
 현재 시간은 ${today}
+<br>
+<%out.print ( getServletContext().getRealPath("/")); %>
+
+
+
 <%-- 현재시간은 <%=date%> --%>
 <%--<%=request.getRealPath("/") %>  --%>
+
 
 </body>
 </html>

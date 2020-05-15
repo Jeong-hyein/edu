@@ -8,7 +8,7 @@
 <style>
 	.mailbg {background-color: yellowgreen};
 </style>
-<title>memberList.jsp</title>
+<title>edu/memberList.jsp</title>
 </head>
 <body>
 	<%@include file="/common/menu.jsp"%>

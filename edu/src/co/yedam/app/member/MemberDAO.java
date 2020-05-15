@@ -44,7 +44,6 @@ public class MemberDAO {
 			// 5. 연결해제
 			ConnectionManager.close(conn);
 		}
-
 		return r;
 	}
 

@@ -1,13 +1,15 @@
 package co.yedam.app.member;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.beanutils.BeanUtils;
 
 @WebServlet("/MemberInsert.do") //memberinsert.jsp 랑 맞아야 한다.
 public class MemberInsert extends HttpServlet {
@@ -24,23 +26,21 @@ public class MemberInsert extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		//1. 파라미터 받기
-		String id = request.getParameter("id"); //name속성이 파라미터
+/*		String id = request.getParameter("id"); //name속성이 파라미터
 		String pwd = request.getParameter("pwd"); 
 		//이름, 취미, 종교, 자기소개
 		String name = request.getParameter("name");
 //		String hobby = request.getParameter("hobby");
+		String gender = request.getParameter("gender");
+		String religion = request.getParameter("religion");
+		String introduction = request.getParameter("introduction");*/
 		String[] hobby = request.getParameterValues("hobby"); //값을 받아와서 배열로 만든다. p148
 		String hobbys = "";
 		if(hobby != null) {
 			for(String temp : hobby) {
 				hobbys += temp + ",";
 			}
-			
-			
 		}
-		String gender = request.getParameter("gender");
-		String religion = request.getParameter("religion");
-		String introduction = request.getParameter("introduction");
 		
 //		PrintWriter out = response.getWriter();
 //		response.getWriter().append("<br>id = " + id)
@@ -58,14 +58,22 @@ public class MemberInsert extends HttpServlet {
 		//2. 서비스 로직 처리 (DAO)
 		MemberDAO memberDAO = new MemberDAO();
 		MemberVO member = new MemberVO();
-		member.setId(id);
+/*		member.setId(id);
 		member.setPwd(pwd);
 		member.setName(name);
 		member.setHobby(hobbys);
 		member.setGender(gender);
 		member.setReligion(religion);
-		member.setIntroduction(introduction);
-		int r = memberDAO.memberInsert(member);
+		member.setIntroduction(introduction);*/
+		
+		try {
+			BeanUtils.copyProperties(member, request.getParameterMap()); //파라미터값을 편하게 담을수있음.
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		member.setHobby(hobbys);
+		int r = memberDAO.memberInsert(member); 
 		
 		//3. 결과 출력
 //		PrintWriter out = response.getWriter();

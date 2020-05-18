@@ -19,3 +19,11 @@ id varchar2(20)						--작성자
 );
 
 create sequence seq_board; 
+
+create table nmember
+(id varchar2(20) primary key,   --아이디
+pwd varchar2(60),				--패스워드
+name varchar2(20),				--이름
+introduction varchar2(1000),	--자기소개
+regdt date						--가입일자
+);

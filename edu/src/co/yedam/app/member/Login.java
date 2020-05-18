@@ -15,13 +15,6 @@ import javax.servlet.http.HttpSession;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Login() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터
@@ -57,13 +50,11 @@ public class Login extends HttpServlet {
 		//3. 결과 저장
 		
 		
-		//4. 뷰페잊로 포워드
+		//4. 뷰페이지로 포워드
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//post로 받아서 doget을 부른다.
 		doGet(request, response);

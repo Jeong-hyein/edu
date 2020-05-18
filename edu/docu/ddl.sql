@@ -20,10 +20,22 @@ id varchar2(20)						--작성자
 
 create sequence seq_board; 
 
+drop table schedule;
+
 create table nmember
 (id varchar2(20) primary key,   --아이디
 pwd varchar2(60),				--패스워드
 name varchar2(20),				--이름
+gender char(1),					--성별
 introduction varchar2(1000),	--자기소개
 regdt date						--가입일자
+);
+
+create table schedule
+(seq number(20) primary key,
+sdate date not null,
+id varchar2(20),
+schedule varchar2(1000) not null,
+memo varchar2(1000),
+foreign key(id) references nmember(id)
 );

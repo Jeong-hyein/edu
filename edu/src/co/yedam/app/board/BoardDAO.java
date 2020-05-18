@@ -11,7 +11,7 @@ import co.yedam.app.member.MemberVO;
 public class BoardDAO {
 	int r = 0;
 	Connection conn = null;
-	PreparedStatement psmt = null;
+	PreparedStatement pstmt = null;
 
 	public int boardInsert(BoardVO board) {
 
@@ -23,14 +23,14 @@ public class BoardDAO {
 			String sql = "insert into board (seq, title, contents, regdt, id)"
 					+ " values ((select nvl(max(seq),0) +1 from board), ?, ?, sysdate, ?)";
 
-			psmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 
 			// 3. 실행
-			psmt.setString(1, board.getTitle());
-			psmt.setString(2, board.getContents());
-			psmt.setString(3, board.getId());
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getContents());
+			pstmt.setString(3, board.getId());
 
-			r = psmt.executeUpdate();
+			r = pstmt.executeUpdate();
 
 			// 4. 결과처리
 			System.out.println(r + " 건이 등록됨.");
@@ -48,17 +48,15 @@ public class BoardDAO {
 	// 단건조회
 	public BoardVO getBorad(String id) {
 		BoardVO vo = new BoardVO();
-		Connection conn = null;
-		PreparedStatement psmt = null;
 		try {
 			// 1. DB 연결
 			conn = ConnectionManager.getConnnect();
 			// 2. 쿼리 준비
-			String sql = "select * from member where id = ?";
-			psmt = conn.prepareStatement(sql);
+			String sql = "select * from board where id = ?";
+			pstmt = conn.prepareStatement(sql);
 			// 3. statment 실행, 내가 넘겨주는 id값으로 찾을거임
-			psmt.setString(1, id);
-			ResultSet rs = psmt.executeQuery(); // rs: 결과 집합.
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery(); // rs: 결과 집합.
 			if (rs.next()) {
 				vo.setId(rs.getString("id"));
 				vo.setTitle(rs.getString("title"));
@@ -79,17 +77,15 @@ public class BoardDAO {
 	// 전체조회
 	public ArrayList<BoardVO> getBoardList() {
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
-		Connection conn = null;
-		PreparedStatement psmt = null;
 		try {
 			// 1. DB 연결
 			conn = ConnectionManager.getConnnect();
 			// 2. 쿼리 준비
 //			String sql = "select * from board order by seq desc";
 			String sql = "select board.*, member.name from board join member on board.id = member.id order by seq desc";
-			psmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			// 3. statment 실행
-			ResultSet rs = psmt.executeQuery(); // rs: 결과 집합.
+			ResultSet rs = pstmt.executeQuery(); // rs: 결과 집합.
 			while (rs.next()) { // 조회된 건수만큼 while 돈다.
 				BoardVO vo = new BoardVO();
 				vo.setId(rs.getString("id"));
@@ -122,13 +118,13 @@ public class BoardDAO {
 			String sql = "update board set title=?, contents=?"
 					+ "where id =? ";
 
-			psmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 
 			// 3. 실행
-			psmt.setString(1, board.getTitle());
-			psmt.setString(2, board.getContents());
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getContents());
 
-			r = psmt.executeUpdate();
+			r = pstmt.executeUpdate();
 
 			// 4. 결과처리
 			System.out.println(r + " 건이 등록됨.");
@@ -150,10 +146,10 @@ public class BoardDAO {
 			conn = ConnectionManager.getConnnect();
 			// 2. sql구문 준비
 			String sql = "delete borad where seq = ?";
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, borad.getSeq());
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, borad.getSeq());
 			// 3. 실행
-			r = psmt.executeUpdate();
+			r = pstmt.executeUpdate();
 			// 4. 결과처리
 			System.out.println(r + " 건이 삭제됨.");
 

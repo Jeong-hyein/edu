@@ -39,3 +39,6 @@ schedule varchar2(1000) not null,
 memo varchar2(1000),
 foreign key(id) references nmember(id)
 );
+
+alter table board add
+filename varchar2(100);

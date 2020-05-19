@@ -19,20 +19,24 @@
 	<table border="1">
 		<tr>
 			<td>번호</td>
-			<td>제목</td>
-			<td>등록시간</td>
 			<td>아이디</td>
-			<td>이름</td>
+			<!-- <td>이름</td> -->
+			<td>제목</td>
+			<td>내용</td>
+			<td>등록시간</td>
+			<td>파일이름</td>
 		</tr>
 		<% ArrayList<BoardVO> list = (ArrayList<BoardVO>) request.getAttribute("list");
 		for (BoardVO vo : list) { %>
 		<tr>
 			<td><%=vo.getSeq()%></td>
+			<td><%=vo.getId()%></td>
+			<%-- <td><%=vo.getName()%></td> --%>
 			<td><%=vo.getTitle()%></td>
 			<%-- <td><%=vo.getContents()%></td> --%>
+			<td><%=vo.getContents()%>
 			<td><%=vo.getRegdt()%></td>
-			<td><%=vo.getId()%></td>
-			<td><%=vo.getName()%></td>
+			<td><a href="FileDown.do?seq=<%=vo.getSeq()%>"><%=vo.getFilename()%></a></td>
 		</tr>
 	<% } %>
 	</table>

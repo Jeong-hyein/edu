@@ -7,6 +7,7 @@ public class BoardVO {
 	String regdt;
 	String id;
 	String name;
+	private String filename;
 	
 	public String getName() {
 		return name;
@@ -45,11 +46,21 @@ public class BoardVO {
 		this.id = id;
 	}
 	
+	
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	
 	@Override
 	public String toString() {
 		return "BoardVO [seq=" + seq + ", title=" + title + ", contents=" + contents + ", regdt=" + regdt + ", id=" + id
-				+ ", name=" + name + "]";
+				+ ", name=" + name + ", filename=" + filename + "]";
 	}
+
+	
 	
 
 }

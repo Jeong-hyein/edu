@@ -52,9 +52,10 @@
 		취미 : <input type="checkbox" name="hobby" id="hobby1" value="h01" />
 		등산 <input type="checkbox" name="hobby" id="hobby2" value="h02" /> 운동
 		<input type="checkbox" name="hobby" id="hobby3" value="h03" /> 독서 <input
-			type="checkbox" name="hobby" id="hobby4" value="h04" /> 여행 <br /> 성별
-		: <input type="radio" name="gender" value="m" /> 남자 <input
-			type="radio" name="gender" value="f" /> 여자 <br /> 종교 : <select
+			type="checkbox" name="hobby" id="hobby4" value="h04" /> 여행 <br /> 
+			성별: <input type="radio" name="gender" value="m" /> 남자 <input
+			type="radio" name="gender" value="f" /> 여자 <br /> 
+			종교 : <select
 			name="religion" id="religion">
 			<option value="r01">기독교
 			<option value="r02">불교

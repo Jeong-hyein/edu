@@ -20,8 +20,8 @@ public class BoardDAO {
 			conn = ConnectionManager.getConnnect();
 
 			// 2. sql구문 준비, seq_board.nextval 대신 서브쿼리 사용 -> 빈 번호 없애려고
-			String sql = "insert into board (seq, title, contents, regdt, id)"
-					+ " values ((select nvl(max(seq),0) +1 from board), ?, ?, sysdate, ?)";
+			String sql = "insert into board (seq, title, contents, regdt, id, filename)"
+					+ " values ((select nvl(max(seq),0) +1 from board), ?, ?, sysdate, ?,?)";
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -29,7 +29,7 @@ public class BoardDAO {
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getContents());
 			pstmt.setString(3, board.getId());
-
+			pstmt.setString(4, board.getFilename());
 			r = pstmt.executeUpdate();
 
 			// 4. 결과처리
@@ -52,7 +52,7 @@ public class BoardDAO {
 			// 1. DB 연결
 			conn = ConnectionManager.getConnnect();
 			// 2. 쿼리 준비
-			String sql = "select * from board where id = ?";
+			String sql = "select * from board where seq = ?";
 			pstmt = conn.prepareStatement(sql);
 			// 3. statment 실행, 내가 넘겨주는 id값으로 찾을거임
 			pstmt.setString(1, id);
@@ -63,6 +63,7 @@ public class BoardDAO {
 				vo.setContents(rs.getString("contents"));
 				vo.setRegdt(rs.getString("regdt"));
 				vo.setSeq(rs.getInt("seq"));
+				vo.setFilename(rs.getString("filename"));
 			}
 			// 4. 결과 저정
 		} catch (Exception e) {
@@ -94,6 +95,7 @@ public class BoardDAO {
 				vo.setContents(rs.getString("contents"));
 				vo.setRegdt(rs.getString("regdt"));
 				vo.setSeq(rs.getInt("seq"));
+				vo.setFilename(rs.getString("filename"));
 				list.add(vo);
 			}
 			// 4. 결과 저정

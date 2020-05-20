@@ -33,8 +33,9 @@ public class BoardInsert extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("utf-8");
+//		response.setContentType("text/html; charset=UTF-8"); 필터를 추가해놔서 할 필요없다.
+//		request.setCharacterEncoding("utf-8");
+		System.out.println("게시글 등록 서블릿 실행");
 		
 		//파라미터 받기
 		String id = request.getParameter("id"); //서비스 로직 처리 같이하는법 vo.setId(request.getParameter("id")

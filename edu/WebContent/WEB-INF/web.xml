@@ -10,6 +10,18 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+   <listener>
+  <listener-class>co.yedam.app.common.SessionListener</listener-class>
+  </listener>
+  <filter>
+  <filter-name>encoding</filter-name>
+  <filter-class>co.yedam.app.common.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  <filter-name>encoding</filter-name>
+  <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+  
   <servlet>
   	<servlet-name>TestServ</servlet-name> <!-- 별칭을 붙인거임 -->
   	<servlet-class>co.yedam.app.test.TestServ</servlet-class> <!-- 경로랑 클래스명 정확히 적어줘야함 -->
@@ -27,6 +39,7 @@
   	<url-pattern>/test4.do</url-pattern>
   </servlet-mapping>
   <session-config>
-  	<session-timeout>30</session-timeout>
+  	<session-timeout>1</session-timeout>
   </session-config>
+
 </web-app>

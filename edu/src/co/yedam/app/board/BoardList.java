@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import co.yedam.app.member.MemberDAO;
 import co.yedam.app.member.MemberVO;
 
-/**
- * Servlet implementation class BoardList
- */
+
 @WebServlet("/BoardList.do")
 public class BoardList extends HttpServlet {
 	private static final long serialVersionUID = 1L;

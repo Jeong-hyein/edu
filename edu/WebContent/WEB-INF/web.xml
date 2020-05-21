@@ -10,9 +10,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-   <listener>
-  <listener-class>co.yedam.app.common.SessionListener</listener-class>
-  </listener>
+
   <filter>
   <filter-name>encoding</filter-name>
   <filter-class>co.yedam.app.common.EncodingFilter</filter-class>

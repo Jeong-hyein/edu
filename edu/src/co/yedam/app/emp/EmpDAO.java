@@ -114,7 +114,7 @@ public class EmpDAO {
 		}
 		return r;
 	}
-	//부서별 급여합계  부서번호,부서명,급여합계 List<Map>
+	//부서별 급여합계  부서번호,부서명,급여합계 List<Map>: vo로 안받고싶으면 map사용
 	public List<Map<String,Object>> selectDeptSal(){
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		try {

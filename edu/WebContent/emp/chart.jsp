@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -24,7 +25,8 @@
         data.addColumn('number', '사원수'); //number를 넣기로 했기때문에 넘버를 넣어야한다. number가 아니면 parseFloat해줘야함
         
         //ajax 호출
-        var list = getChartDate();
+        //var list = getChartDate();
+        var list = = getChartDateJquery();
         data.addRows(list);
         /*         data.addRows([
           ['인사부', 5],
@@ -42,6 +44,14 @@
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+      
+      function getChartDataJquery() {
+    	  var list = [];
+    	  
+    	  
+    	  return list;
+      }
+      
       
       function getChartDate() {
     	  var list = [];

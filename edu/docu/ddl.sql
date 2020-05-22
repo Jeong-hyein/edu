@@ -42,3 +42,26 @@ foreign key(id) references nmember(id)
 
 alter table board add
 filename varchar2(100);
+
+
+drop table board;
+
+
+create table schedule(
+seq number(20) primary key,
+sdate date not null,
+id varchar2(20),
+schedule varchar2(1000) not null,
+memo varchar2(1000),
+CONSTRAINT star_FK FOREIGN KEY (id) REFERENCES nmember(id) on delete cascade
+);
+
+
+create table board(
+seq number(20) primary key,		
+title varchar2(60), 				
+contents varchar2(1000), 			
+regdt date,							
+id varchar2(20),
+CONSTRAINT starFK FOREIGN KEY (id) REFERENCES nmember(id) on delete cascade
+);

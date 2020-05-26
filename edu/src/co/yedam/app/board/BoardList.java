@@ -1,8 +1,8 @@
 package co.yedam.app.board;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import co.yedam.app.member.MemberDAO;
-import co.yedam.app.member.MemberVO;
 
 
 @WebServlet("/BoardList.do")
@@ -61,8 +59,33 @@ public class BoardList extends HttpServlet {
 //			out.print("</tr>");
 //		}
 //		out.print("</table>");
+		
+		BoardVO vo = dao.getBorad("2");
+		getDday(vo.getRegdt());
+		
 	}
 	
+
+
+	@SuppressWarnings("deprecation")
+	private void getDday(String regdt) {
+		System.out.println(regdt);
+		
+		int idx = regdt.lastIndexOf(" ");
+		
+		String date = regdt.substring(0,idx);
+		
+		Date dday = new Date(regdt);
+		Date now = new Date();
+		System.out.println(dday.getTime());
+		System.out.println(now);
+		long gap = dday.getTime() - now.getTime();
+		System.out.println(gap);
+		long result = (long) (Math.floor(gap/(1000*60*60*24))*-1);
+		
+		System.out.println(result);
+	}
+
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

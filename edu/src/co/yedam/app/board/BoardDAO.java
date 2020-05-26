@@ -46,7 +46,7 @@ public class BoardDAO {
 	}
 
 	// 단건조회
-	public BoardVO getBorad(String id) {
+	public BoardVO getBorad(String seq) {
 		BoardVO vo = new BoardVO();
 		try {
 			// 1. DB 연결
@@ -55,7 +55,7 @@ public class BoardDAO {
 			String sql = "select * from board where seq = ?";
 			pstmt = conn.prepareStatement(sql);
 			// 3. statment 실행, 내가 넘겨주는 id값으로 찾을거임
-			pstmt.setString(1, id);
+			pstmt.setString(1, seq);
 			ResultSet rs = pstmt.executeQuery(); // rs: 결과 집합.
 			if (rs.next()) {
 				vo.setId(rs.getString("id"));

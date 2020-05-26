@@ -52,7 +52,6 @@
     	  return list;
       }
       
-      
       function getChartDate() {
     	  var list = [];
   		//1. xhr 객체 생성
